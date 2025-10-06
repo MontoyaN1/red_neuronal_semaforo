@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2025-09-23 11:23:59 by Eclipse SUMO netedit Version 1.24.0
+<neteditConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/neteditConfiguration.xsd">
+
+    <input>
+        <sumocfg-file value="/home/juanpablo/prueba_sumo/prueba1.sumocfg"/>
+        <route-files value="/home/juanpablo/prueba_sumo/prueba1.rou.xml"/>
+        <sumo-net-file value="/home/juanpablo/prueba_sumo/prueba1.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/juanpablo/prueba_sumo/prueba1.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.avoid-overlap value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="0"/>
+    </processing>
+
+    <junctions>
+        <no-internal-links value="true"/>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.50"/>
+        <rectangular-lane-cut value="0"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="0"/>
+    </pedestrian>
+
+</neteditConfiguration>
+-->
+
+<net version="1.20" junctionCornerDetail="5" limitTurnSpeed="5.50" avoidOverlap="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="-81.72,-34.68,43.25,38.24" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+
+    <edge id="-E0" from="J1" to="clusterJ7_clusterJ3_J4_J5" priority="-1" shape="43.25,-1.73 -26.24,-1.09">
+        <lane id="-E0_0" index="0" speed="13.89" length="65.61" shape="43.26,-0.13 -14.14,0.40"/>
+    </edge>
+    <edge id="-E0.64" from="clusterJ7_clusterJ3_J4_J5" to="J0" priority="-1" shape="-26.24,-1.09 -81.72,-1.02">
+        <lane id="-E0.64_0" index="0" speed="13.89" length="59.71" shape="-29.46,0.51 -81.72,0.58"/>
+    </edge>
+    <edge id="-E1" from="clusterJ7_clusterJ3_J4_J5" to="J2" priority="-1" shape="-21.38,-8.02 -21.29,-34.68">
+        <lane id="-E1_0" index="0" speed="13.89" length="35.21" shape="-22.98,-8.27 -22.89,-34.68"/>
+    </edge>
+    <edge id="-E2" from="clusterJ7_clusterJ3_J4_J5" to="J6" priority="-1" shape="-22.23,4.37 -22.01,23.94 -21.86,38.24">
+        <lane id="-E2_0" index="0" speed="13.89" length="37.75" shape="-20.61,6.06 -20.41,23.92 -20.26,38.22"/>
+    </edge>
+    <edge id="E0" from="J0" to="clusterJ7_clusterJ3_J4_J5" priority="-1" shape="-81.72,-1.02 -18.75,-1.05">
+        <lane id="E0_0" index="0" speed="13.89" length="59.70" shape="-81.72,-2.62 -29.46,-2.64"/>
+    </edge>
+    <edge id="E0.70" from="clusterJ7_clusterJ3_J4_J5" to="J1" priority="-1" shape="-18.75,-1.05 43.25,-1.73">
+        <lane id="E0.70_0" index="0" speed="13.89" length="65.59" shape="-14.18,-2.70 43.23,-3.33"/>
+    </edge>
+    <edge id="E1" from="J2" to="clusterJ7_clusterJ3_J4_J5" priority="-1" shape="-21.29,-34.68 -21.38,-8.02">
+        <lane id="E1_0" index="0" speed="13.89" length="35.21" shape="-19.69,-34.67 -19.78,-8.26"/>
+    </edge>
+    <edge id="E2" from="J6" to="clusterJ7_clusterJ3_J4_J5" priority="-1" shape="-21.86,38.24 -22.01,23.94 -22.23,4.37">
+        <lane id="E2_0" index="0" speed="13.89" length="37.75" shape="-23.46,38.26 -23.61,23.96 -23.81,6.10"/>
+    </edge>
+
+    <tlLogic id="J8" type="static" programID="0" offset="0">
+        <phase duration="42" state="rrGGrrGG"/>
+        <phase duration="3"  state="rryyrryy"/>
+        <phase duration="42" state="GGrrGGrr"/>
+        <phase duration="3"  state="yyrryyrr"/>
+    </tlLogic>
+
+    <junction id="J0" type="dead_end" x="-81.72" y="-1.02" incLanes="-E0.64_0" intLanes="" shape="-81.72,-1.02 -81.72,-4.22 -81.72,2.18"/>
+    <junction id="J1" type="dead_end" x="43.25" y="-1.73" incLanes="E0.70_0" intLanes="" shape="43.25,-1.73 43.28,1.47 43.21,-4.93"/>
+    <junction id="J2" type="dead_end" x="-21.29" y="-34.68" incLanes="-E1_0" intLanes="" shape="-21.29,-34.68 -24.49,-34.69 -21.29,-34.68"/>
+    <junction id="J6" type="dead_end" x="-21.86" y="38.24" incLanes="-E2_0" intLanes="" shape="-21.86,38.24 -18.66,38.21 -21.86,38.24"/>
+    <junction id="clusterJ7_clusterJ3_J4_J5" type="traffic_light" x="-22.18" y="0.49" incLanes="E2_0 -E0_0 E1_0 E0_0" intLanes="" shape="-25.41,6.12 -19.01,6.04 -18.49,3.82 -17.81,3.03 -16.86,2.47 -15.63,2.12 -14.12,2.00 -14.19,-4.30 -16.41,-4.72 -17.19,-5.27 -17.74,-6.04 -18.07,-7.04 -18.18,-8.26 -24.58,-8.28 -25.13,-6.04 -25.81,-5.25 -26.76,-4.69 -27.98,-4.36 -29.46,-4.24 -29.46,2.11 -27.23,2.56 -26.44,3.11 -25.88,3.89 -25.54,4.89">
+        <request index="0" response="00001000" foes="00001000"/>
+        <request index="1" response="11001000" foes="11001000"/>
+        <request index="2" response="00000000" foes="00100000"/>
+        <request index="3" response="00000000" foes="00100011"/>
+        <request index="4" response="10000000" foes="10000000"/>
+        <request index="5" response="10001100" foes="10001100"/>
+        <request index="6" response="00000000" foes="00000010"/>
+        <request index="7" response="00000000" foes="00110010"/>
+    </junction>
+
+    <connection from="-E0" to="-E2" fromLane="0" toLane="0" tl="J8" linkIndex="2" dir="r" state="O"/>
+    <connection from="-E0" to="-E0.64" fromLane="0" toLane="0" tl="J8" linkIndex="3" dir="s" state="O"/>
+    <connection from="E0" to="-E1" fromLane="0" toLane="0" tl="J8" linkIndex="6" dir="r" state="O"/>
+    <connection from="E0" to="E0.70" fromLane="0" toLane="0" tl="J8" linkIndex="7" dir="s" state="O"/>
+    <connection from="E1" to="E0.70" fromLane="0" toLane="0" tl="J8" linkIndex="4" dir="r" state="o"/>
+    <connection from="E1" to="-E2" fromLane="0" toLane="0" tl="J8" linkIndex="5" dir="s" state="o"/>
+    <connection from="E2" to="-E0.64" fromLane="0" toLane="0" tl="J8" linkIndex="0" dir="r" state="o"/>
+    <connection from="E2" to="-E1" fromLane="0" toLane="0" tl="J8" linkIndex="1" dir="s" state="o"/>
+
+</net>

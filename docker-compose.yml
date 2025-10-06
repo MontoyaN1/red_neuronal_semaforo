@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+      - PYTHONPATH=/usr/share/sumo/tools
+    # Necesario para la GUI si usas sumo-gui (solo desarrollo)
+    tty: true
+    stdin_open: true
