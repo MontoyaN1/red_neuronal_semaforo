@@ -1,0 +1,38 @@
+{
+  "evaluation_date":{
+    "0":"2025-10-06T16:51:29.728904"
+  },
+  "tls_id":{
+    "0":"J8"
+  },
+  "metrics":{
+    "0":{
+      "total_waiting_time_mean":127.4655555556,
+      "total_waiting_time_std":51.586097742,
+      "total_waiting_time_max":586.0,
+      "total_waiting_time_min":0.0,
+      "average_speed_mean":0.9658717725,
+      "average_speed_std":0.5462334215,
+      "average_speed_max":6.0763456838,
+      "average_speed_min":0.0,
+      "throughput_mean":42.2577777778,
+      "throughput_std":4.0993489396,
+      "throughput_max":48,
+      "throughput_min":0,
+      "queue_length_mean":4.9872222222,
+      "queue_length_std":1.2312383358,
+      "queue_length_max":8,
+      "queue_length_min":0,
+      "efficiency_score_mean":0.4084108028,
+      "efficiency_score_std":0.0438588858,
+      "efficiency_score_max":0.5940358849,
+      "efficiency_score_min":0.103414493,
+      "final_efficiency_score":0.4084108028
+    }
+  },
+  "comparison":{
+    "0":{
+
+    }
+  }
+}

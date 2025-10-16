@@ -1,2 +1,6 @@
 traci
 sumolib
+pandas
+tensorflow[and-cuda]
+tensorflow.keras
+scikit-learn
