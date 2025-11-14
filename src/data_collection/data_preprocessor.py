@@ -1,9 +1,7 @@
 # src/data_collection/data_preprocessor.py
 import pickle
-import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 
 
 class DataPreprocessor:
@@ -114,23 +112,23 @@ class DataPreprocessor:
 
     def _calculate_optimal_durations(self, df):
         optimal_durations = []
-        
+
         for _, row in df.iterrows():
             # Calcular por fase con mapeo corregido
             phase_volumes = [0, 0]
             phase_waiting = [0, 0]
-            
+
             for lane_idx in [2, 3, 6, 7]:  # Fase 0
-                phase_volumes[0] += row.get(f'lane_{lane_idx}_volume', 0)
-                phase_waiting[0] += row.get(f'lane_{lane_idx}_waiting', 0)
-            
+                phase_volumes[0] += row.get(f"lane_{lane_idx}_volume", 0)
+                phase_waiting[0] += row.get(f"lane_{lane_idx}_waiting", 0)
+
             for lane_idx in [0, 1, 4, 5]:  # Fase 2
-                phase_volumes[1] += row.get(f'lane_{lane_idx}_volume', 0)
-                phase_waiting[1] += row.get(f'lane_{lane_idx}_waiting', 0)
-            
+                phase_volumes[1] += row.get(f"lane_{lane_idx}_volume", 0)
+                phase_waiting[1] += row.get(f"lane_{lane_idx}_waiting", 0)
+
             # ✅ ESTRATEGIA MEJORADA: Considerar congestión severa
             max_waiting = max(phase_waiting)
-            
+
             if max_waiting > 10:
                 # Congestión severa - dar más tiempo a fases con colas largas
                 base_cycle = 70
@@ -139,13 +137,13 @@ class DataPreprocessor:
                 # Tráfico normal - balance entre volumen y espera
                 base_cycle = 60
                 weights = [w * 2 + v for v, w in zip(phase_volumes, phase_waiting)]
-            
+
             total_weight = sum(weights) if sum(weights) > 0 else 1
             main_durations = [int(base_cycle * (w / total_weight)) for w in weights]
-            
+
             # Asegurar límites razonables
             main_durations = [max(15, min(55, d)) for d in main_durations]
-            
+
             optimal_durations.append([main_durations[0], 3, main_durations[1], 3])
-        
+
         return np.array(optimal_durations)

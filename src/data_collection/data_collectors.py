@@ -9,14 +9,14 @@ class DataCollector:
         self.lanes = []
 
     def get_throughput(self, lanes=None):
-        """Calcular throughput (vehículos/hora)"""
+        """Calcular vehiculos presentes en los carriles"""
         if lanes is None:
             lanes = self.lanes
         total_vehicles = 0
         for lane in lanes:
             vehicles = traci.lane.getLastStepVehicleIDs(lane)
             total_vehicles += len(vehicles)
-        return total_vehicles
+        return total_vehicles  # densidad instantenea
 
     def get_max_queue_length(self, lanes=None):
         """Obtener longitud máxima de cola"""

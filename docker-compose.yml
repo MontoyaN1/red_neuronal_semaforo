@@ -8,6 +8,6 @@ services:
     environment:
       - DEBUG=True
       - PYTHONPATH=/usr/share/sumo/tools
-    # Necesario para la GUI si usas sumo-gui (solo desarrollo)
+    
     tty: true
     stdin_open: true

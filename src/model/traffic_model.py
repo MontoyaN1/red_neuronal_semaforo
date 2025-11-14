@@ -1,6 +1,6 @@
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dense, Input, Dropout, BatchNormalization
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.models import Model  # type: ignore
+from tensorflow.keras.layers import Dense, Input, Dropout, BatchNormalization  # type: ignore
+from tensorflow.keras.optimizers import Adam  # type: ignore
 import numpy as np
 
 
@@ -12,19 +12,19 @@ class TrafficLightNN:
 
     def build_model(self, learning_rate):
         """Construir la arquitectura de la red neuronal"""
-        # volumen de vehículos, ocupación, tiempo espera, fase actual
+        # volumen de vehículos, velocidad, tiempo espera, fase actual
         inputs = Input(shape=(self.input_dim,))
 
-       # Arquitectura ligeramente más profunda
-        x = Dense(128, activation='relu')(inputs)
+        # Arquitectura ligeramente más profunda
+        x = Dense(128, activation="relu")(inputs)
         x = BatchNormalization()(x)
         x = Dropout(0.3)(x)
-        
-        x = Dense(64, activation='relu')(x)
+
+        x = Dense(64, activation="relu")(x)
         x = BatchNormalization()(x)
         x = Dropout(0.2)(x)
-        
-        x = Dense(32, activation='relu')(x)
+
+        x = Dense(32, activation="relu")(x)
         x = BatchNormalization()(x)
         x = Dropout(0.1)(x)
 

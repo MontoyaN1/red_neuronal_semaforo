@@ -1,11 +1,10 @@
-# src/training/trainer.py (VERSIÓN CORREGIDA)
 import traci
 import pandas as pd
 import sys
 import os
 from sklearn.model_selection import train_test_split
 
-# Añadir el directorio raíz al path para imports absolutos
+
 sys.path.append(os.path.join(os.path.dirname(__file__), "../.."))
 
 from src.data_collection.data_collectors import DataCollector
@@ -22,11 +21,11 @@ class TrainingPipeline:
 
     def load_config(self, config_path):
         return {
-            "simulation_runs": 12,  # Más variedad
-            "steps_per_run": 7200,  # Más datos por simulación
+            "simulation_runs": 12,
+            "steps_per_run": 7200,
             "test_size": 0.1,
-            "batch_size": 64,  # Menos datos de test
-            "epochs": 200,  # Más épocas de entrenamiento
+            "batch_size": 64,
+            "epochs": 200,
             "model_save_path": "data/trained_models/",
         }
 
@@ -46,14 +45,8 @@ class TrainingPipeline:
         # 4. Guardar modelo
         model_path = self.save_model()
 
-        # 5. Evaluar modelo si se solicita
-        if evaluate:
-            evaluation_metrics = self.evaluate_trained_model(model_path)
-            print("✅ Entrenamiento y evaluación completados")
-            return model_path, history, evaluation_metrics
-        else:
-            print("✅ Entrenamiento completado")
-            return model_path, history, None
+        print("✅ Entrenamiento completado")
+        return model_path, history, None
 
     def collect_training_data(self):
         simulation_data = []
@@ -157,62 +150,3 @@ class TrainingPipeline:
             print(f"❌ Error crítico guardando modelo: {e}")
             # Fallback extremo
             return self._create_emergency_model()
-
-    def _create_emergency_model(self):
-        """Crear modelo de emergencia si todo falla"""
-        from tensorflow.keras.models import Sequential
-        from tensorflow.keras.layers import Dense
-        import numpy as np
-
-        # Modelo mínimo funcional
-        emergency_model = Sequential(
-            [
-                Dense(16, activation="relu", input_shape=(26,)),
-                Dense(8, activation="relu"),
-                Dense(4, activation="linear"),
-            ]
-        )
-        emergency_model.compile(optimizer="adam", loss="mse")
-
-        # Entrenar rápido con datos dummy
-        X_dummy = np.random.random((100, 26))
-        y_dummy = np.random.random((100, 4))
-        emergency_model.fit(X_dummy, y_dummy, epochs=1, verbose=0)
-
-        model_path = os.path.join(self.config["model_save_path"], "emergency_model.h5")
-        emergency_model.save(model_path)
-        print(f"🆘 Modelo de emergencia creado: {model_path}")
-        return model_path
-
-    def evaluate_trained_model(self, model_path):
-        """Evaluar el modelo recién entrenado"""
-        from .evaluator import ModelEvaluator
-
-        print("🧪 Evaluando modelo entrenado...")
-
-        evaluator = ModelEvaluator(self.model, self.preprocessor, self.tls_id)
-        metrics = evaluator.evaluate_model("prueba2.sumocfg")
-
-        # Generar reporte
-        report_file = model_path.replace(".h5", "_evaluation.json")
-        evaluator.generate_evaluation_report(metrics, output_file=report_file)
-
-        return metrics
-
-
-def main():
-    """Función principal para ejecutar entrenamiento DESDE ESTE ARCHIVO"""
-    pipeline = TrainingPipeline(tls_id="J1")  # Reemplaza con tu ID de semáforo
-    model_path, history, metrics = pipeline.run_training(evaluate=True)
-
-    print("🎯 Entrenamiento finalizado!")
-    print(f"📁 Modelo guardado en: {model_path}")
-
-    if metrics:
-        print(
-            f"📊 Evaluación completada. Score: {metrics.get('final_efficiency_score', 0):.3f}"
-        )
-
-
-if __name__ == "__main__":
-    main()

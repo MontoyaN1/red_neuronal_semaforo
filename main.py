@@ -1,14 +1,12 @@
-# main.py (VERSIÓN COMPLETA Y FUNCIONAL)
 import argparse
 import sys
 import os
 import pickle
 
-# Añadir src al path para imports
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
-from training.trainer import TrainingPipeline
-from training.evaluator import ModelEvaluator
+from src.training.trainer import TrainingPipeline
+from src.training.evaluator import ModelEvaluator
 
 
 def load_preprocessor(preprocessor_path):
@@ -60,7 +58,7 @@ def main():
             return
 
         # Cargar modelo - CON COMPILE=FALSE
-        from tensorflow.keras.models import load_model
+        from tensorflow.keras.models import load_model  # type: ignore
 
         try:
             model = load_model(args.model, compile=False)
@@ -91,7 +89,7 @@ def main():
             return
 
         # Importar aquí para evitar dependencias circulares
-        from deployment.traffic_controller import RealTimeController
+        from .src.deployment.traffic_controller import RealTimeController
 
         controller = RealTimeController(
             model_path=args.model, tls_id=args.tls, use_gui=args.gui

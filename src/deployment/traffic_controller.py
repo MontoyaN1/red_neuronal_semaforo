@@ -1,9 +1,6 @@
-# src/deployment/traffic_controller.py (VERSIÓN MEJORADA)
 import traci
-import numpy as np
 import sys
 import os
-from tensorflow.keras.models import load_model
 import pickle
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../.."))
@@ -42,7 +39,7 @@ class RealTimeController:
             return None
 
         try:
-            from tensorflow.keras.models import load_model
+            from tensorflow.keras.models import load_model  # type: ignore
 
             # ✅ USAR compile=False para evitar problemas de compatibilidad
             model = load_model(model_path, compile=False)
@@ -135,7 +132,7 @@ class RealTimeController:
         """Ejecutar control en tiempo real"""
         sumo_binary = "sumo-gui" if self.use_gui else "sumo"
 
-        print(f"🚦 Iniciando control inteligente en tiempo real...")
+        print("🚦 Iniciando control inteligente en tiempo real...")
         traci.start([sumo_binary, "-c", "prueba2.sumocfg"])
 
         step = 0
